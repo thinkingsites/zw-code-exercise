@@ -1,6 +1,128 @@
 /* PUT STYLES HERE */
 
+body {
+    color: green;
+    background: black;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+h1, h2 {
+    color: white;
+    margin: 0;
+}
+h2 {
+    font-size: 42px;
+}
+
+.text-shadow {
+    text-align: center;
+    text-shadow: #080808 6px 6px 8px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.key {
+    color: white;
+    font-family: monospace;
+    background: green;
+    padding: 0 0.5rem;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    color: white;
+    background-color: purple;
+    padding: .6rem 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: 333ms background-color linear;
+    animation: pulsing 1s ease-in-out 0s infinite alternate;
+
+    &:hover {
+        background-color: blueviolet;
+    }
+}
+
+div.container {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 64px 1fr;
+}
+
+.score {
+    color: white;
+    padding: 1rem;
+    border-bottom: 1px solid green;
+}
+.icon-beer {
+    color: brown;
+}
+
+.play-area {
+    border: 16px solid green;
+}
+
 svg {
     width: 100px;
     height: 100px;
+    fill: #FFF;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+
+.icon-beer:before {
+    font-size: 24px;
+}
+
+.centered-box {
+    width: 50%;
+    max-width: 600px;
+    padding: 2rem;
+    background-color: #222;
+    border-radius: .5rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: green 0 0 15px 5px;
+}
+.btn-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.you-win {
+    width: 33%;
+}
+
+.zoom-in {
+    animation: zoomIn 500ms ease-in 100ms 1;
+}
+
+@keyframes pulsing {
+    from {
+        box-shadow: pink 0 0 16px 8px;
+    }
+    to {
+        box-shadow: pink 0 0 16px 2px;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: translateY(-50%) scale(0);
+    }
+    to {
+        transform: translateY(-50%) scale(1);
+    }
 }

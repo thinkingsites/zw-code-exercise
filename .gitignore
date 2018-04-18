@@ -57,5 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
-dist/**
+.DS_Store
+
 node_modules
+
+dist/home/*
+dist/main/*
