@@ -7,6 +7,7 @@ import './home.font';
 const initKittyPosition = { x: 0, y: 0 };
 const initKittyInterval = 3000; // 3 sec
 const kittySpeedIncrease = 200; // 200 ms
+const colorCycle = ['white', 'red', 'orange', 'yellow', 'green', 'blue', 'purple'];
 
 class HomeSPA extends Component {
   constructor(props) {
@@ -66,10 +67,12 @@ class HomeSPA extends Component {
       kittyRotation,
       kittyPosition
     } = this.state;
-    const kittyTransform = 
-       `translate3d(${kittyPosition.x}px, ${kittyPosition.y}px, 0)
-        rotate(${kittyRotation}deg)`;
-    const kittyTransition = `transform ${this.state.msTilNextMove}ms ease-in-out`;
+
+    const kittyStyle = {
+      transform: `translate3d(${kittyPosition.x}px, ${kittyPosition.y}px, 0) rotate(${kittyRotation}deg)`,
+      transition: `transform ${this.state.msTilNextMove}ms ease-in-out, fill .5s ease-in-out`,
+      fill: colorCycle[score.length % colorCycle.length]
+    }
 
     if (!gameStarted) {
       return (
@@ -92,8 +95,7 @@ class HomeSPA extends Component {
               <div className="play-area" ref={ this.setPlayAreaDiv }>
                 {
                   !playerWins
-                  ? <GithubKitty onClick={ this.handleKittyClick }
-                                 style={{ transform: kittyTransform, transition: kittyTransition }} />
+                  ? <GithubKitty onClick={ this.handleKittyClick } style={ kittyStyle } />
                   : <div className="centered-box you-win">
                       <h2 className="text-shadow">You Win!</h2>
                       <p className="center-text">
@@ -141,9 +143,9 @@ class HomeSPA extends Component {
   updateDimensions() {
     // Save the dimensions of the play area to keep the kitty in bounds!
     if (this.playAreaDiv) {
-      // Subtract 48px so the kitty doesn't overlap the edge of the play area
-      this.playAreaWidth = this.playAreaDiv.clientWidth - 48;
-      this.playAreaHeight = this.playAreaDiv.clientHeight - 48;
+      // Subtract 64px so the kitty doesn't overlap the edge of the play area
+      this.playAreaWidth = this.playAreaDiv.clientWidth - 64;
+      this.playAreaHeight = this.playAreaDiv.clientHeight - 64;
     }
   }
 
@@ -170,16 +172,17 @@ class HomeSPA extends Component {
   handleKittyClick() {
     // Make the kitty meow!
     const meowIdx = getRandomInt(0, 2);
-    console.log(meowIdx)
     this.meows[meowIdx].play();
 
     const score = this.state.score.concat(
       <span key={ this.state.score.length } className="icon icon-beer"/>
     );
 
+    // The player once the score reaches 10
     const playerWins = (score.length === 10);
 
-    const msTilNextMove = this.state.msTilNextMove - kittySpeedIncrease; // Speed up the kitty!
+    // Speed up the kitty!
+    const msTilNextMove = this.state.msTilNextMove - kittySpeedIncrease;
 
     window.clearInterval(this.kittyPosInterval);
 
@@ -192,7 +195,7 @@ class HomeSPA extends Component {
       this.kittyPosInterval = setInterval(this.setNewKittyPosition, msTilNextMove);
     }
 
-    // Increase the score and set the new timer speed
+    // Set the score, the new timer speed, win vars
     this.setState({ score, playerWins, msTilNextMove, secondsToWin });
   }
 
