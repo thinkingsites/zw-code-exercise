@@ -18,6 +18,8 @@ glob.sync(compiledFiles)
     modules[BUNDLE_HELPER.path(file.replace('/index.js', ''))] = file
   })
 
+console.
+
 module.exports = {
     entry: modules,
     output: {
@@ -31,10 +33,10 @@ module.exports = {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
             'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
         },
-        contentBase: './dist',
+        contentBase: 'dist',
         historyApiFallback: {
             index: 'index.html'
-          },
+        },
     },
     devtool: 'source-map',
     module: {
@@ -128,7 +130,7 @@ module.exports = {
         })
       ]
     }
-    
+
     if (ENV === 'production') {
 
       module.exports.plugins.push(
