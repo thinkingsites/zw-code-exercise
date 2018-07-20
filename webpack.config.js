@@ -16,9 +16,7 @@ global.BUNDLE_HELPER = require('./src/utils')
 glob.sync(compiledFiles)
   .forEach((file)  => {
     modules[BUNDLE_HELPER.path(file.replace('/index.js', ''))] = file
-  })
-
-console.
+});
 
 module.exports = {
     entry: modules,
@@ -33,7 +31,7 @@ module.exports = {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
             'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
         },
-        contentBase: 'dist',
+        contentBase: ['./dist','./src/spas'],
         historyApiFallback: {
             index: 'index.html'
         },

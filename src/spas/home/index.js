@@ -26,11 +26,11 @@ class HomeSPA extends Component {
 	}
 
     renderGame(){
-		const beer = () => <span className="icon icon-beer"/>;
+		const beer = (i) => <span key={i} className="icon icon-beer"/>;
         return (
             <div>
 				<div className="beers">
-                	{[...Array(this.state.beers)].map(() => beer())}
+                	{[...Array(this.state.beers)].map((x,i) => beer(i))}
 				</div>
 				<div  className={`gitcat ${this.state.forth ? "forth" : ""}`} onClick={this.beerMe.bind(this)}>
 					<GithubKitty/>
